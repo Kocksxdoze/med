@@ -37,6 +37,9 @@ const Booking = BookingModule(config);
 const PalatesModule = require("./models/palates.js");
 const Palates = PalatesModule(config);
 
+const BaseModule = require("./models/base.js");
+const Base = BaseModule(config);
+
 const models = {
   Doctor: require("./models/doctors.js")(config, Sequelize.DataTypes),
   Categories: require("./models/categories.js")(config, Sequelize.DataTypes),
@@ -82,5 +85,6 @@ module.exports = {
   Report,
   Booking,
   Palates,
+  Base,
   ...models,
 };

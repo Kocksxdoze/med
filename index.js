@@ -14,9 +14,9 @@ const createReport = require("./lib/reps/createReport.js");
 const updateReport = require("./lib/reps/updateReport.js");
 const deleteReport = require("./lib/reps/deleteReport.js");
 const { getReports, getReportById } = require("./lib/reps/getReports.js");
-const { createCash } = require("./lib/cashbox/createCash.js");
-const { updateCash } = require("./lib/cashbox/updateCash.js");
-const { deleteCash } = require("./lib/cashbox/deleteCash.js");
+const createCash = require("./lib/cashbox/createCash.js");
+const updateCash = require("./lib/cashbox/updateCash.js");
+const deleteCash = require("./lib/cashbox/deleteCash.js");
 const { getCashById, getCash } = require("./lib/cashbox/getCash.js");
 
 const {
@@ -65,6 +65,14 @@ const {
   getPalateById,
   getPalates,
 } = require("./lib/palates/palatesHandle.js");
+
+const {
+  createBase,
+  updateBase,
+  deleteBase,
+  getBaseById,
+  getBases,
+} = require("./lib/fillial/baseHandle.js");
 
 const app = express();
 const port = process.env.PORT;
@@ -145,6 +153,13 @@ app.put("/cash/edit/:id", updateCash);
 app.delete("cash/delete/:id", deleteCash);
 app.get("/cash/:id", getCashById);
 app.get("/cashbox", getCash);
+
+// base handler
+app.post("/base/new", createBase);
+app.put("/base/edit/:id", updateBase);
+app.delete("/base/delete/:id", deleteBase);
+app.get("/base/:id", getBaseById);
+app.get("/bases", getBases);
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
