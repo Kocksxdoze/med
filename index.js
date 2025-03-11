@@ -14,6 +14,10 @@ const createReport = require("./lib/reps/createReport.js");
 const updateReport = require("./lib/reps/updateReport.js");
 const deleteReport = require("./lib/reps/deleteReport.js");
 const { getReports, getReportById } = require("./lib/reps/getReports.js");
+const { createCash } = require("./lib/cashbox/createCash.js");
+const { updateCash } = require("./lib/cashbox/updateCash.js");
+const { deleteCash } = require("./lib/cashbox/deleteCash.js");
+const { getCashById, getCash } = require("./lib/cashbox/getCash.js");
 
 const {
   createCategory,
@@ -136,6 +140,11 @@ app.get("/palate/:id", getPalateById);
 app.get("/palates", getPalates);
 
 // cashbox handler
+app.post("/cash/new", createCash);
+app.put("/cash/edit/:id", updateCash);
+app.delete("cash/delete/:id", deleteCash);
+app.get("/cash/:id", getCashById);
+app.get("/cashbox", getCash);
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
