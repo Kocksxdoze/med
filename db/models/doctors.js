@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
     },
     email: {
       type: DataTypes.STRING,
-      allownull: true,
+      allowNull: true,
     },
     street: {
       type: DataTypes.STRING,
@@ -63,6 +63,13 @@ module.exports = (sequelize) => {
       defaultValue: "doctor",
     },
   });
+
+  Doctor.associate = (models) => {
+    Doctor.hasMany(models.Offer, {
+      foreignKey: "doctorId",
+      as: "offers",
+    });
+  };
 
   Doctor.beforeCreate(async (doctor) => {
     const salt = await bcrypt.genSalt(10);

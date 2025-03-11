@@ -10,26 +10,48 @@ const config = new Sequelize("med", "root", "", {
 const ClientModule = require("./models/client.js");
 const Client = ClientModule(config);
 
-const DoctorModule = require("./models/doctors.js");
-const Doctor = DoctorModule(config);
+// const DoctorModule = require("./models/doctors.js");
+// const Doctor = DoctorModule(config);
 
 const CashboxModule = require("./models/cashbox.js");
 const Cashbox = CashboxModule(config);
 
-const CategoriesModule = require("./models/categories.js");
-const Categories = CategoriesModule(config);
+// const CategoriesModule = require("./models/categories.js");
+// const Categories = CategoriesModule(config);
 
-const SubCategoryModule = require("./models/sub-categories.js");
-const SubCategory = SubCategoryModule(config);
+// const SubCategoryModule = require("./models/sub-categories.js");
+// const SubCategory = SubCategoryModule(config);
 
-const OfferModule = require("./models/offers.js");
-const Offer = OfferModule(config);
+// const OfferModule = require("./models/offers.js");
+// const Offer = OfferModule(config);
 
 const PromocodeModule = require("./models/promocode.js");
 const Promocode = PromocodeModule(config);
 
 const ReportModule = require("./models/report.js");
 const Report = ReportModule(config);
+
+const BookingModule = require("./models/booking.js");
+const Booking = BookingModule(config);
+
+const PalatesModule = require("./models/palates.js");
+const Palates = PalatesModule(config);
+
+const models = {
+  Doctor: require("./models/doctors.js")(config, Sequelize.DataTypes),
+  Categories: require("./models/categories.js")(config, Sequelize.DataTypes),
+  SubCategory: require("./models/sub-categories.js")(
+    config,
+    Sequelize.DataTypes
+  ),
+  Offer: require("./models/offers.js")(config, Sequelize.DataTypes),
+};
+
+Object.keys(models).forEach((modelName) => {
+  if (models[modelName].associate) {
+    models[modelName].associate(models);
+  }
+});
 
 config
   .query("SET FOREIGN_KEY_CHECKS = 0", { raw: true })
@@ -55,11 +77,10 @@ config
 module.exports = {
   config,
   Client,
-  Doctor,
   Promocode,
   Cashbox,
-  Categories,
-  SubCategory,
-  Offer,
   Report,
+  Booking,
+  Palates,
+  ...models,
 };

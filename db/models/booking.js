@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  const Offer = sequelize.define("Offer", {
+  const Booking = sequelize.define("Booking", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -11,23 +11,22 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    sum: {
+    palateId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    bookingDays: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    doctorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    clientId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
   });
-
-  Offer.associate = (models) => {
-    Offer.belongsTo(models.Doctor, {
-      foreignKey: "doctorId",
-      as: "doctor",
-    });
-
-    Offer.belongsTo(models.SubCategory, {
-      foreignKey: "subCategoryId",
-      as: "subCategory",
-    });
-  };
-
-  return Offer;
+  return Booking;
 };

@@ -14,6 +14,7 @@ const createReport = require("./lib/reps/createReport.js");
 const updateReport = require("./lib/reps/updateReport.js");
 const deleteReport = require("./lib/reps/deleteReport.js");
 const { getReports, getReportById } = require("./lib/reps/getReports.js");
+
 const {
   createCategory,
   editCategory,
@@ -44,6 +45,22 @@ const {
   deletePromo,
   getPromocodes,
 } = require("./lib/promo/promocode.js");
+
+const {
+  createBooking,
+  updateBooking,
+  deleteBooking,
+  getBookingById,
+  getBooking,
+} = require("./lib/booking/BookingHandle.js");
+
+const {
+  createPalate,
+  updatePalate,
+  deletePalate,
+  getPalateById,
+  getPalates,
+} = require("./lib/palates/palatesHandle.js");
 
 const app = express();
 const port = process.env.PORT;
@@ -103,6 +120,20 @@ app.put("/report/edit/:id", updateReport);
 app.delete("/report/delete/:id", deleteReport);
 app.get("/reports", getReports);
 app.get("/report/:id", getReportById);
+
+// booking handler
+app.post("/booking/new", createBooking);
+app.put("/booking/edit/:id", updateBooking);
+app.delete("/booking/delete/:id", deleteBooking);
+app.get("/book/:id", getBookingById);
+app.get("/bookings", getBooking);
+
+//palates handler
+app.post("/palate/new", createPalate);
+app.put("/palate/edit/:id", updatePalate);
+app.delete("/palate/delete/:id", deletePalate);
+app.get("/palate/:id", getPalateById);
+app.get("/palates", getPalates);
 
 // cashbox handler
 

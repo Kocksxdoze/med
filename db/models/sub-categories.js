@@ -11,14 +11,27 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    doctorId: {
+    categoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    offerId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      references: {
+        model: "Categories",
+        key: "id",
+      },
     },
   });
+
+  SubCategory.associate = (models) => {
+    SubCategory.belongsTo(models.Categories, {
+      foreignKey: "categoryId",
+      as: "category",
+    });
+
+    SubCategory.hasMany(models.Offer, {
+      foreignKey: "subCategoryId",
+      as: "offers",
+    });
+  };
+
   return SubCategory;
 };

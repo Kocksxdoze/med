@@ -9,12 +9,16 @@ module.exports = (sequelize) => {
     },
     categoryName: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    subCategoriesId: {
-      type: DataTypes.INTEGER,
       allowNull: true,
     },
   });
+
+  Categories.associate = (models) => {
+    Categories.hasMany(models.SubCategory, {
+      foreignKey: "categoryId",
+      as: "subcategories",
+    });
+  };
+
   return Categories;
 };

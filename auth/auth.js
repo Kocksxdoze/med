@@ -24,8 +24,7 @@ async function login(req, res) {
       name: doctor.name,
       surname: doctor.surname,
       phoneNumber: doctor.phoneNumber,
-      email: doctor,
-      email,
+      email: doctor.email,
       street: doctor.street,
       job: doctor.job,
       profession: doctor.profession,
@@ -35,7 +34,7 @@ async function login(req, res) {
     },
     secretKey,
     {
-      expiresIn: "12h",
+      expiresIn: "1d",
     }
   );
 
