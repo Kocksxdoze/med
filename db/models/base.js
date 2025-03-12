@@ -12,5 +12,12 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
   });
+
+  Base.associate = (models) => {
+    Base.belongsTo(models.Doctor, {
+      foreignKey: "baseId",
+      as: "doctor",
+    });
+  };
   return Base;
 };
