@@ -71,6 +71,13 @@ module.exports = (sequelize) => {
     });
   };
 
+  Doctor.associate = (models) => {
+    Doctor.hasMany(models.Base, {
+      foreignKey: "baseId",
+      as: "base",
+    });
+  };
+
   Doctor.beforeCreate(async (doctor) => {
     const salt = await bcrypt.genSalt(10);
     doctor.password = await bcrypt.hash(doctor.password, salt);

@@ -37,8 +37,8 @@ const Booking = BookingModule(config);
 const PalatesModule = require("./models/palates.js");
 const Palates = PalatesModule(config);
 
-const BaseModule = require("./models/base.js");
-const Base = BaseModule(config);
+// const BaseModule = require("./models/base.js");
+// const Base = BaseModule(config);
 
 const models = {
   Doctor: require("./models/doctors.js")(config, Sequelize.DataTypes),
@@ -48,6 +48,7 @@ const models = {
     Sequelize.DataTypes
   ),
   Offer: require("./models/offers.js")(config, Sequelize.DataTypes),
+  Base: require("./models/base.js")(config, Sequelize.DataTypes),
 };
 
 Object.keys(models).forEach((modelName) => {
@@ -85,6 +86,5 @@ module.exports = {
   Report,
   Booking,
   Palates,
-  Base,
   ...models,
 };
