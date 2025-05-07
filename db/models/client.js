@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     dateBirth: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     payment: {
@@ -42,31 +42,35 @@ module.exports = (sequelize) => {
     },
     republic: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     region: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+    },
+    street: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     addres: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     passportSeries: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     passportNum: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     passportGiver: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     pinfl: {
       type: DataTypes.BIGINT,
-      allowNull: false,
+      allowNull: true,
     },
     socialPlace: {
       type: DataTypes.STRING,
@@ -86,23 +90,23 @@ module.exports = (sequelize) => {
     },
     discount: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     benefitCategory: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     navigation: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     doctor: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     doctorId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     base: {
       type: DataTypes.STRING,

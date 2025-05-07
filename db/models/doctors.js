@@ -54,7 +54,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     dateBirth: {
-      type: DataTypes.DATE,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     role: {
@@ -72,9 +72,9 @@ module.exports = (sequelize) => {
   };
 
   Doctor.associate = (models) => {
-    Doctor.hasMany(models.Base, {
+    Doctor.belongsTo(models.Base, {
       foreignKey: "baseId",
-      as: "base",
+      as: "bases",
     });
   };
 

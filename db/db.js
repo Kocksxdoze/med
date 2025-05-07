@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 
 const config = new Sequelize("med", "root", "", {
   host: "127.0.0.1",
-  port: 3500,
+  port: 3306,
   dialect: "mysql",
 });
 
@@ -28,8 +28,8 @@ const Cashbox = CashboxModule(config);
 const PromocodeModule = require("./models/promocode.js");
 const Promocode = PromocodeModule(config);
 
-const ReportModule = require("./models/report.js");
-const Report = ReportModule(config);
+// const ReportModule = require("./models/report.js");
+// const Report = ReportModule(config);
 
 const BookingModule = require("./models/booking.js");
 const Booking = BookingModule(config);
@@ -49,6 +49,8 @@ const models = {
   ),
   Offer: require("./models/offers.js")(config, Sequelize.DataTypes),
   Base: require("./models/base.js")(config, Sequelize.DataTypes),
+  Report: require("./models/report.js")(config, Sequelize.DataTypes),
+  ReportsTo: require("./models/reportsTo.js")(config, Sequelize.DataTypes),
 };
 
 Object.keys(models).forEach((modelName) => {
@@ -60,7 +62,7 @@ Object.keys(models).forEach((modelName) => {
 config
   .query("SET FOREIGN_KEY_CHECKS = 0", { raw: true })
   .then(() => {
-    return config.sync({ force: false });
+    return config.sync({ alter: false });
   })
   .then(() => {
     console.log('Database and tables synced with "SET FOREIGN_KEY_CHECKS = 0"');
@@ -83,7 +85,6 @@ module.exports = {
   Client,
   Promocode,
   Cashbox,
-  Report,
   Booking,
   Palates,
   ...models,

@@ -30,7 +30,7 @@ async function login(req, res) {
       profession: doctor.profession,
       user: doctor.user,
       dateBirth: doctor.dateBirth,
-      role: doctor.role,
+      role: doctor.role ,
     },
     secretKey,
     {
@@ -58,20 +58,7 @@ async function register(req, res) {
       role,
     } = req.body;
     console.log("username", username);
-    const doctor = await Doctor.create({
-      username,
-      password,
-      name,
-      surname,
-      phoneNubmer,
-      email,
-      street,
-      job,
-      profession,
-      user,
-      dateBirth,
-      role,
-    });
+    const doctor = await Doctor.create(req.body);
     res.json({ doctor });
   } catch (error) {
     res.status(500).json({ error: error.message });

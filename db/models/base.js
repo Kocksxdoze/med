@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
   });
 
   Base.associate = (models) => {
-    Base.belongsTo(models.Doctor, {
+    Base.hasMany(models.Doctor, {
       foreignKey: "baseId",
       as: "doctors",
     });

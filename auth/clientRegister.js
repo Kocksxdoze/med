@@ -30,34 +30,10 @@ router.post("/create", async (req, res) => {
       doctor,
       doctorId,
     } = req.body;
+    console.log(req.body);
+    const client = await Client.create(req.body);
 
-    const client = await Client.create({
-      name,
-      surname,
-      lastName,
-      phoneNumber,
-      homePhone,
-      sex,
-      dateBirth,
-      payment,
-      republic,
-      region,
-      addres,
-      passportSeries,
-      passportNum,
-      passportGiver,
-      pinfl,
-      socialPlace,
-      work,
-      debt,
-      discount,
-      benefitCategory,
-      navigation,
-      doctor,
-      doctorId,
-    });
-
-    res.status(200).json({ client });
+    res.status(200).json({ client, id: client.id });
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.log("Error", error.message);

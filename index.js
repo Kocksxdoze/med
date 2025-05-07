@@ -9,6 +9,7 @@ const doctorUpdating = require("./lib/users/doctorUpdating.js");
 const clientUpdating = require("./lib/users/clientUpdating.js");
 const fetchDoctors = require("./lib/users/getDoctors.js");
 const fetchClients = require("./lib/users/getClients.js");
+const fetchClient = require("./lib/users/getClietnById.js");
 const doctorDeleting = require("./lib/users/deleteDoctor.js");
 const clientDeleting = require("./lib/users/deleteClient.js");
 const createReport = require("./lib/reps/createReport.js");
@@ -75,9 +76,11 @@ const {
   getBases,
 } = require("./lib/fillial/baseHandle.js");
 
+const createRep = require("./lib/repsTo/createReps.js");
+
 const app = express();
 const port = process.env.PORT || process.env.PORT + 1;
-  
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -100,6 +103,7 @@ app.use("/client/delete", clientDeleting);
 // get users
 app.use(fetchDoctors);
 app.use(fetchClients);
+app.use(fetchClient);
 
 // categories handler
 app.post("/category/new", createCategory);
@@ -134,6 +138,9 @@ app.put("/report/edit/:id", updateReport);
 app.delete("/report/delete/:id", deleteReport);
 app.get("/reports", getReports);
 app.get("/report/:id", getReportById);
+
+// reps handler
+app.post("/rep/new", createRep);
 
 // booking handler
 app.post("/booking/new", createBooking);

@@ -11,31 +11,22 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    reportCategory: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    desc: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    doctorId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     createdAt: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       defaultValue: DataTypes.NOW,
-    },
-    deletedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
     },
     updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
   });
+  Report.associate = (models) => {
+    Report.hasMany(models.ReportsTo, {
+      foreignKey: "reportId",
+      as: "reportsTo",
+    });
+  };
+
   return Report;
 };
