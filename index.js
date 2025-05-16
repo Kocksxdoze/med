@@ -78,6 +78,38 @@ const {
 
 const createRep = require("./lib/repsTo/createReps.js");
 
+const {
+  createLab,
+  updateLab,
+  deleteLab,
+  getLabs,
+  getLabById,
+} = require("./lib/labHandler/index.js");
+
+const {
+  createDiagnostic,
+  updateDiagnostic,
+  deleteDiagnostic,
+  getDiagnostics,
+  getDiagnosticById,
+} = require("./lib/diagnosticHandler/diagnosticHandler.js");
+
+const {
+  createCabinet,
+  updateCabinet,
+  deleteCabinet,
+  getCabinets,
+  getCabinetById,
+} = require("./lib/cabinet/cabinetHandler.js");
+
+const {
+  createPlaner,
+  updatePlaner,
+  deletePlaner,
+  getPlaners,
+  getPlanerById,
+} = require("./lib/planerHandler/planerHandler.js");
+
 const app = express();
 const port = process.env.PORT || process.env.PORT + 1;
 
@@ -169,6 +201,34 @@ app.put("/base/edit/:id", updateBase);
 app.delete("/base/delete/:id", deleteBase);
 app.get("/base/:id", getBaseById);
 app.get("/bases", getBases);
+
+// lab handler
+app.post("/lab/new", createLab);
+app.put("/lab/update/:id", updateLab);
+app.delete("/lab/detele/:id", deleteLab);
+app.get("/labs", getLabs);
+app.get("/lab/:id", getLabById);
+
+// diagnostic handler
+app.post("/dia/new", createDiagnostic);
+app.put("/dia/update/:id", updateDiagnostic);
+app.delete("/dia/delete/:id", deleteDiagnostic);
+app.get("/dias", getDiagnostics);
+app.get("/dia/:id", getDiagnosticById);
+
+// cabinet handler
+app.post("/cabinet/new", createCabinet);
+app.delete("/cabinet/delete/:id", deleteCabinet);
+app.put("/cabinet/update/:id", updateCabinet);
+app.get("/cabinets", getCabinets);
+app.get("/cabinet/:id", getCabinetById);
+
+// planer handler
+app.post("/planer/new", createPlaner);
+app.delete("/planer/delete/:id", deletePlaner);
+app.put("/planer/update/:id", updatePlaner);
+app.get("/planers", getPlaners);
+app.get("/planer/:id", getPlanerById);
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);

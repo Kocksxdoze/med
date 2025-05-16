@@ -22,7 +22,6 @@ module.exports = (sequelize) => {
     phoneNumber: {
       type: DataTypes.STRING,
       allowNull: true,
-      unique: true,
     },
     homePhone: {
       type: DataTypes.STRING,
@@ -117,6 +116,28 @@ module.exports = (sequelize) => {
       defaultValue: "client",
     },
   });
+
+  Client.associate = (models) => {
+    Client.belongsTo(models.Cabinet, {
+      foreignKey: "clientId",
+      as: "cabinet",
+    });
+
+    Client.hasMany(models.Lab, {
+      foreignKey: "clientId",
+      as: "labs",
+    });
+
+    Client.hasMany(models.Diagnostic, {
+      foreignKey: "clientId",
+      as: "diagnostics",
+    });
+
+    Client.hasMany(models.Offer, {
+      foreignKey: "clientId",
+      as: "offers",
+    });
+  };
 
   return Client;
 };

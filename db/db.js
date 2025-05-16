@@ -7,9 +7,6 @@ const config = new Sequelize("med", "root", "", {
   dialect: "mysql",
 });
 
-const ClientModule = require("./models/client.js");
-const Client = ClientModule(config);
-
 // const DoctorModule = require("./models/doctors.js");
 // const Doctor = DoctorModule(config);
 
@@ -26,22 +23,31 @@ const Cashbox = CashboxModule(config);
 // const Offer = OfferModule(config);
 
 const PromocodeModule = require("./models/promocode.js");
-const Promocode = PromocodeModule(config);
+const Promocode = PromocodeModule(config, Sequelize.DataTypes);
 
 // const ReportModule = require("./models/report.js");
 // const Report = ReportModule(config);
-
 const BookingModule = require("./models/booking.js");
 const Booking = BookingModule(config);
 
-const PalatesModule = require("./models/palates.js");
-const Palates = PalatesModule(config);
+const AppointmentModule = require("./models/appointment.js");
+const Appointment = BookingModule(config);
+
+const AppOfferModule = require("./models/appOffers.js");
+const AppOffer = BookingModule(config);
+
+const BenefitModule = require("./models/benefits.js");
+const Benefit = BookingModule(config);
+
+const TypeModule = require("./models/types.js");
+const Type = BookingModule(config);
 
 // const BaseModule = require("./models/base.js");
 // const Base = BaseModule(config);
 
 const models = {
   Doctor: require("./models/doctors.js")(config, Sequelize.DataTypes),
+  Client: require("./models/client.js")(config, Sequelize.DataTypes),
   Categories: require("./models/categories.js")(config, Sequelize.DataTypes),
   SubCategory: require("./models/sub-categories.js")(
     config,
@@ -49,8 +55,13 @@ const models = {
   ),
   Offer: require("./models/offers.js")(config, Sequelize.DataTypes),
   Base: require("./models/base.js")(config, Sequelize.DataTypes),
+  Palate: require("./models/palates.js")(config, Sequelize.DataTypes),
   Report: require("./models/report.js")(config, Sequelize.DataTypes),
   ReportsTo: require("./models/reportsTo.js")(config, Sequelize.DataTypes),
+  Lab: require("./models/lab.js")(config, Sequelize.DataTypes),
+  Diagnostic: require("./models/diagnostic.js")(config, Sequelize.DataTypes),
+  Planer: require("./models/planer.js")(config, Sequelize.DataTypes),
+  Cabinet: require("./models/cabinet.js")(config, Sequelize.DataTypes),
 };
 
 Object.keys(models).forEach((modelName) => {
@@ -60,9 +71,9 @@ Object.keys(models).forEach((modelName) => {
 });
 
 config
-  .query("SET FOREIGN_KEY_CHECKS = 0", { raw: true })
+  .query("SET FOREIGN_KEY_CHECKS = 0")
   .then(() => {
-    return config.sync({ alter: false });
+    return config.sync({ alter: true });
   })
   .then(() => {
     console.log('Database and tables synced with "SET FOREIGN_KEY_CHECKS = 0"');
@@ -82,10 +93,12 @@ config
 
 module.exports = {
   config,
-  Client,
+  Appointment,
+  AppOffer,
+  Benefit,
+  Type,
   Promocode,
   Cashbox,
   Booking,
-  Palates,
   ...models,
 };

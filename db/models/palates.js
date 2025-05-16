@@ -7,8 +7,8 @@ module.exports = (sequelize) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    palataNumber: {
-      type: DataTypes.INTEGER,
+    palate: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     floor: {
@@ -20,7 +20,14 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     palateType: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
     },
   });
+  Palate.associate = (models) => {
+    Palate.belongsTo(models.Planer, {
+      foreignKey: "palateId",
+      as: "planers",
+    });
+  };
+  return Palate;
 };

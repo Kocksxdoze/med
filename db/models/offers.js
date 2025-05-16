@@ -23,9 +23,9 @@ module.exports = (sequelize) => {
       as: "doctor",
     });
 
-    Offer.belongsTo(models.SubCategory, {
-      foreignKey: "subCategoryId",
-      as: "subCategory",
+    Offer.belongsTo(models.Client, {
+      foreignKey: "offerId",
+      as: "clients",
     });
   };
 
