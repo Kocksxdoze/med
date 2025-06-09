@@ -1,7 +1,7 @@
 require("dotenv").config();
 const Sequelize = require("sequelize");
 
-const config = new Sequelize("med", "root", "", {
+const config = new Sequelize("meds", "root", "", {
   host: "127.0.0.1",
   port: 3306,
   dialect: "mysql",
@@ -31,16 +31,16 @@ const BookingModule = require("./models/booking.js");
 const Booking = BookingModule(config);
 
 const AppointmentModule = require("./models/appointment.js");
-const Appointment = BookingModule(config);
+const Appointment = AppointmentModule(config);
 
 const AppOfferModule = require("./models/appOffers.js");
-const AppOffer = BookingModule(config);
+const AppOffer = AppOfferModule(config);
 
-const BenefitModule = require("./models/benefits.js");
-const Benefit = BookingModule(config);
+// const BenefitModule = require("./models/benefits.js");
+// const Benefit = BenefitModule(config);
 
 const TypeModule = require("./models/types.js");
-const Type = BookingModule(config);
+const Type = TypeModule(config);
 
 // const BaseModule = require("./models/base.js");
 // const Base = BaseModule(config);
@@ -54,14 +54,22 @@ const models = {
     Sequelize.DataTypes
   ),
   Offer: require("./models/offers.js")(config, Sequelize.DataTypes),
+  OffersCategory: require("./models/offersCategory.js")(
+    config,
+    Sequelize.DataTypes
+  ),
   Base: require("./models/base.js")(config, Sequelize.DataTypes),
   Palate: require("./models/palates.js")(config, Sequelize.DataTypes),
   Report: require("./models/report.js")(config, Sequelize.DataTypes),
   ReportsTo: require("./models/reportsTo.js")(config, Sequelize.DataTypes),
   Lab: require("./models/lab.js")(config, Sequelize.DataTypes),
+  LabCategory: require("./models/labCategory.js")(config, Sequelize.DataTypes),
   Diagnostic: require("./models/diagnostic.js")(config, Sequelize.DataTypes),
+  DiaCategory: require("./models/diaCategory.js")(config, Sequelize.DataTypes),
   Planer: require("./models/planer.js")(config, Sequelize.DataTypes),
   Cabinet: require("./models/cabinet.js")(config, Sequelize.DataTypes),
+  Conclusion: require("./models/conclusion.js")(config, Sequelize.DataTypes),
+  Benefit: require("./models/benefits.js")(config, Sequelize.DataTypes),
 };
 
 Object.keys(models).forEach((modelName) => {
@@ -93,12 +101,11 @@ config
 
 module.exports = {
   config,
-  Appointment,
-  AppOffer,
-  Benefit,
-  Type,
   Promocode,
   Cashbox,
   Booking,
+  Appointment,
+  AppOffer,
+  Type,
   ...models,
 };

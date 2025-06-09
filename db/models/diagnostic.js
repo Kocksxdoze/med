@@ -38,6 +38,10 @@ module.exports = (sequelize) => {
       foreignKey: "clientId",
       as: "clients",
     });
+    Diagnostic.belongsTo(models.DiaCategory, {
+      foreignKey: "diaId",
+      as: "diacategories",
+    });
   };
   return Diagnostic;
 };

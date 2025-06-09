@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
     },
     analise: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     ready: {
       type: DataTypes.BOOLEAN,
@@ -37,6 +37,10 @@ module.exports = (sequelize) => {
     Lab.belongsTo(models.Client, {
       foreignKey: "clientId",
       as: "clients",
+    });
+    Lab.belongsTo(models.LabCategory, {
+      foreignKey: "labId",
+      as: "labcategories",
     });
   };
 

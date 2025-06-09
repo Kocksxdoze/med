@@ -21,6 +21,7 @@ module.exports = (sequelize) => {
     },
     palateType: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
   });
   Palate.associate = (models) => {

@@ -1,26 +1,24 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  const Benefit = sequelize.define("Benefit", {
+  const Conclusion = sequelize.define("Conclusion", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     desc: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
   });
-  Benefit.associate = (models) => {
-    Benefit.belongsTo(models.Client, {
+
+  Conclusion.associate = (models) => {
+    Conclusion.belongsTo(models.Client, {
       foreignKey: "clientId",
       as: "clients",
     });
   };
-  return Benefit;
+
+  return Conclusion;
 };

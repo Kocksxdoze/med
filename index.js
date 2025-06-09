@@ -20,6 +20,7 @@ const createCash = require("./lib/cashbox/createCash.js");
 const updateCash = require("./lib/cashbox/updateCash.js");
 const deleteCash = require("./lib/cashbox/deleteCash.js");
 const { getCashById, getCash } = require("./lib/cashbox/getCash.js");
+const admin = require("./lib/admin.js");
 
 const {
   createCategory,
@@ -110,6 +111,59 @@ const {
   getPlanerById,
 } = require("./lib/planerHandler/planerHandler.js");
 
+const {
+  createAppointment,
+  deleteAppointment,
+  updateAppointment,
+  getAppointment,
+  getAppointmentById,
+} = require("./lib/appointment/handle.js");
+const {
+  createAppOffer,
+  updateAppOffer,
+  deleteAppOffer,
+  getAppOffer,
+  getAppOfferById,
+} = require("./lib/appointment/offers.js");
+const {
+  createType,
+  updateType,
+  deleteType,
+  getType,
+  getTypeById,
+} = require("./lib/appointment/types.js");
+const {
+  createBenefit,
+  updateBenefit,
+  deleteBenefit,
+  getBenefit,
+  getBenefitById,
+} = require("./lib/appointment/benefits.js");
+
+const {
+  createConclusion,
+  updateConclusion,
+  deleteConclusion,
+  getConclusion,
+  getConclusionById,
+} = require("./lib/conc/concs.js");
+
+const {
+  createLabCategory,
+  updateLabCategory,
+  deleteLabCategory,
+  getLabCategories,
+  getLabCategoryById,
+} = require("./lib/labHandler/category.js");
+
+const {
+  createDiaCategory,
+  updateDiaCategory,
+  deleteDiaCategory,
+  getDiaCategories,
+  getDiaCategoryById,
+} = require("./lib/diagnosticHandler/diaCateg.js");
+
 const app = express();
 const port = process.env.PORT || process.env.PORT + 1;
 
@@ -158,6 +212,8 @@ app.delete("/offer/delete/:id", deleteOffer);
 app.get("/offer/:id", getOfferById);
 app.get("/offers", getOffers);
 
+app.get("/offer-categories", getLabCategories);
+
 // promo handler
 app.post("/promo/create", createPromocode);
 app.put("/promo/edit/:id", updatePromo);
@@ -205,9 +261,15 @@ app.get("/bases", getBases);
 // lab handler
 app.post("/lab/new", createLab);
 app.put("/lab/update/:id", updateLab);
-app.delete("/lab/detele/:id", deleteLab);
+app.delete("/lab/delete/:id", deleteLab);
 app.get("/labs", getLabs);
 app.get("/lab/:id", getLabById);
+
+app.post("/lab-category/new", createLabCategory);
+app.put("/lab-category/update/:id", updateLabCategory);
+app.delete("/lab-category/delete/:id", deleteLabCategory);
+app.get("/lab-categories", getLabCategories);
+app.get("/lab-category/:id", getLabCategoryById);
 
 // diagnostic handler
 app.post("/dia/new", createDiagnostic);
@@ -215,6 +277,12 @@ app.put("/dia/update/:id", updateDiagnostic);
 app.delete("/dia/delete/:id", deleteDiagnostic);
 app.get("/dias", getDiagnostics);
 app.get("/dia/:id", getDiagnosticById);
+
+app.post("/dia-category/new", createDiaCategory);
+app.put("/dia-category/update/:id", updateDiaCategory);
+app.delete("/dia-category/delete/:id", deleteDiaCategory);
+app.get("/dia-categories", getDiaCategories);
+app.get("/dia-category/:id", getDiaCategoryById);
 
 // cabinet handler
 app.post("/cabinet/new", createCabinet);
@@ -230,6 +298,39 @@ app.put("/planer/update/:id", updatePlaner);
 app.get("/planers", getPlaners);
 app.get("/planer/:id", getPlanerById);
 
-app.listen(port, () => {
+// appointment helper
+app.post("/app/new", createAppointment);
+app.post("/appo/new", createAppOffer);
+app.post("/type/new", createType);
+app.post("/benefit/new", createBenefit);
+
+app.delete("/app/delete/:id", deleteAppointment);
+app.delete("/appo/delete/:id", deleteAppOffer);
+app.delete("/type/delete/:id", deleteType);
+app.delete("/benefit/delete/:id", deleteBenefit);
+
+app.put("/app/update/:id", updateAppointment);
+app.put("/appo/update/:id", updateAppOffer);
+app.put("/type/update/:id", updateType);
+app.put("/benefit/update/:id", updateBenefit);
+
+app.get("/apps", getAppointment);
+app.get("/appos", getAppOffer);
+app.get("/types", getType);
+app.get("/benefits", getBenefit);
+
+app.get("/app/:id", getAppointmentById);
+app.get("/appo/:id", getAppOfferById);
+app.get("/type/:id", getTypeById);
+app.get("/benefit/:id", getBenefitById);
+
+// conclusion handler
+app.post("/conc/new", createConclusion);
+app.put("/conc/edit/:id", updateConclusion);
+app.delete("/conc/delete/:id", deleteConclusion);
+app.get("/concs", getConclusion);
+app.get("/conc/:id", getConclusionById);
+
+app.listen(port, "0.0.0.0", () => {
   console.log(`Server started on port ${port}`);
 });

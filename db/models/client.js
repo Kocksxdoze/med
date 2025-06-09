@@ -107,6 +107,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    registrator: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     base: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -136,6 +140,14 @@ module.exports = (sequelize) => {
     Client.hasMany(models.Offer, {
       foreignKey: "clientId",
       as: "offers",
+    });
+    Client.hasMany(models.Conclusion, {
+      foreignKey: "clientId",
+      as: "conclusions",
+    });
+    Client.hasMany(models.Benefit, {
+      foreignKey: "clientId",
+      as: "benefits",
     });
   };
 

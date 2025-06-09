@@ -68,12 +68,28 @@ module.exports = (sequelize) => {
       foreignKey: "doctorId",
       as: "offers",
     });
-  };
 
-  Doctor.associate = (models) => {
     Doctor.belongsTo(models.Base, {
       foreignKey: "baseId",
       as: "bases",
+    });
+
+    Doctor.belongsTo(models.ReportsTo, {
+      foreignKey: "doctorid",
+      as: "reportstos",
+    });
+
+    Doctor.belongsTo(models.LabCategory, {
+      foreignKey: "doctorId",
+      as: "labcategories",
+    });
+    Doctor.belongsTo(models.DiaCategory, {
+      foreignKey: "doctorId",
+      as: "diacategories",
+    });
+    Doctor.belongsTo(models.OffersCategory, {
+      foreignKey: "doctorId",
+      as: "offerscategories",
     });
   };
 
