@@ -10,7 +10,7 @@ async function data(sql) {
 }
 
 const sequelizeNew = new Sequelize({
-  database: "med",
+  database: "meds",
   username: "medA",
   password: "",
   dialect: "mysql",

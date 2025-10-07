@@ -53,7 +53,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     dateBirth: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     role: {
@@ -75,20 +75,20 @@ module.exports = (sequelize) => {
     });
 
     Doctor.belongsTo(models.ReportsTo, {
-      foreignKey: "doctorid",
+      foreignKey: "doctorШd",
       as: "reportstos",
     });
 
     Doctor.belongsTo(models.LabCategory, {
-      foreignKey: "doctorId",
+      foreignKey: "doctorId2",
       as: "labcategories",
     });
     Doctor.belongsTo(models.DiaCategory, {
-      foreignKey: "doctorId",
+      foreignKey: "doctorId3",
       as: "diacategories",
     });
     Doctor.belongsTo(models.OffersCategory, {
-      foreignKey: "doctorId",
+      foreignKey: "doctorId4",
       as: "offerscategories",
     });
   };

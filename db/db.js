@@ -81,13 +81,19 @@ Object.keys(models).forEach((modelName) => {
 config
   .query("SET FOREIGN_KEY_CHECKS = 0")
   .then(() => {
-    return config.sync({ alter: true });
+    return config.sync({ force: true, logging: console.log });
   })
   .then(() => {
     console.log('Database and tables synced with "SET FOREIGN_KEY_CHECKS = 0"');
   })
   .catch((error) => {
     console.error("Error syncing database:", error);
+  });
+config
+  .getQueryInterface()
+  .showAllTables()
+  .then((tables) => {
+    console.log("Созданные таблицы:", tables);
   });
 
 // config

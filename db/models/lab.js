@@ -32,6 +32,7 @@ module.exports = (sequelize) => {
       allowNull: true,
       defaultValue: false,
     },
+    
   });
   Lab.associate = (models) => {
     Lab.belongsTo(models.Client, {
